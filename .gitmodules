@@ -1,0 +1,3 @@
+[submodule "taipeitour_core"]
+	path = taipeitour_core
+	url = https://gitlab.com/Leolai80047/taipeitour_core.git
