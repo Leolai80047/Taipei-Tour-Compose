@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">เที่ยวไทเป</string>
+    <string name="address">ที่อยู่:</string>
+    <string name="last_update_time">ปรับปรุงล่าสุด:</string>
+    <string name="system_error">ระบบผิดพลาด</string>
+    <string name="confirm">ยืนยัน</string>
+    <string name="please_select_language">กรุณาเลือกภาษา</string>
+</resources>

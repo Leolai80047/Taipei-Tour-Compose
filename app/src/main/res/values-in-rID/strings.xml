@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">wisata taipei</string>
+    <string name="address">alamat:</string>
+    <string name="last_update_time">pembaruan terbaru:</string>
+    <string name="system_error">sistem bermasalah</string>
+    <string name="confirm">mengonfirmasi</string>
+    <string name="please_select_language">Silakan pilih bahasa</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">viajes a taipéi</string>
+    <string name="address">DIRECCIÓN:</string>
+    <string name="last_update_time">última actualización:</string>
+    <string name="system_error">error del sistema</string>
+    <string name="confirm">confirmar</string>
+    <string name="please_select_language">Por favor selecciona idioma</string>
+</resources>

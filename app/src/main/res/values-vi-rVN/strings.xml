@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">du lịch đài loan</string>
+    <string name="address">Địa chỉ:</string>
+    <string name="last_update_time">cập nhật mới nhất:</string>
+    <string name="system_error">lỗi hệ thống</string>
+    <string name="confirm">xác nhận</string>
+    <string name="please_select_language">Vui lòng chọn ngôn ngữ</string>
+</resources>

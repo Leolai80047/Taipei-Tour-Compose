@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Taipei Tour</string>
+    <string name="address">address:</string>
+    <string name="last_update_time">Update at</string>
+    <string name="system_error">System error</string>
+    <string name="confirm">Confirm</string>
+    <string name="please_select_language">Please select language</string>
+</resources>

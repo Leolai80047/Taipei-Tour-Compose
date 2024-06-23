@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">台北旅行</string>
+    <string name="address">住所：</string>
+    <string name="last_update_time">最新の更新:</string>
+    <string name="system_error">システムエラー</string>
+    <string name="confirm">確認</string>
+    <string name="please_select_language">言語を選択してください</string>
+</resources>
