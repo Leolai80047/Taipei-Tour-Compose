@@ -15,12 +15,5 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val attractionRepository: AttractionInteractor
 ): ViewModel() {
-
-    val data = MutableLiveData<List<AttractionResponse.Data>>()
-
-    fun getAttraction() {
-        viewModelScope.launch {
-            data.postValue(attractionRepository.fetchAttractions(BuildConfig.DEFAULT_LANGUAGE))
-        }
-    }
+    val attractionPager = attractionRepository.getAttractionPagingSource()
 }
