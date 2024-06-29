@@ -1,6 +1,7 @@
 package com.leodemo.taipei_tour_compose.ui.main
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,4 +17,6 @@ class MainViewModel @Inject constructor(
     private val attractionRepository: AttractionInteractor
 ): ViewModel() {
     val attractionPager = attractionRepository.getAttractionPagingSource()
+
+    val currentItem = MutableLiveData<AttractionResponse.Data>()
 }

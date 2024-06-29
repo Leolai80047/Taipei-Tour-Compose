@@ -1,6 +1,7 @@
 package com.leodemo.taipei_tour_compose.ui.utils
 
 import android.graphics.BlurMaskFilter
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -9,6 +10,11 @@ import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -53,3 +59,24 @@ fun Modifier.shadow(
         }
     }
 )
+
+@Composable
+fun HyperLinkText(
+    modifier: Modifier,
+    text: String,
+    linkColor: Color
+) {
+    val annotatedText = buildAnnotatedString {
+        withStyle(SpanStyle(
+            color = linkColor,
+            fontWeight = FontWeight.Bold,
+            textDecoration = TextDecoration.Underline
+        )) {
+            append(text)
+        }
+    }
+    Text(
+        modifier = modifier,
+        text = annotatedText
+    )
+}
