@@ -1,6 +1,7 @@
 package com.leodemo.taipei_tour_compose.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,7 +20,8 @@ import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 
 @Composable
 fun AttractionPager(
-    pager: LazyPagingItems<AttractionResponse.Data>
+    pager: LazyPagingItems<AttractionResponse.Data>,
+    onItemClick: (AttractionResponse.Data) -> Unit
 ) {
     when(pager.loadState.refresh) {
         LoadState.Loading -> {}
@@ -43,7 +45,8 @@ fun AttractionPager(
                         AttractionItem(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .wrapContentHeight(),
+                                .wrapContentHeight()
+                                .clickable { onItemClick(this) },
                             item = this
                         )
                         Spacer(modifier = Modifier.height(10.dp))

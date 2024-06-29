@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -71,6 +72,9 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.paging:paging-runtime:3.3.0")
     implementation("androidx.paging:paging-compose:3.3.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.navigation:navigation-compose:2.8.0-beta04")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
     // hilt
     implementation("com.google.dagger:hilt-android:2.48")
