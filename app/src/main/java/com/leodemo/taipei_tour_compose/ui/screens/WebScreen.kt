@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.leodemo.taipei_tour_compose.R
 import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
+import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,6 +39,7 @@ fun WebScreen(
             title = {
                 Text(
                     text = stringResource(R.string.app_name),
+                    color = color_top_app_bar_onContainer,
                     fontSize = 20.dp.dpToSp()
                 )
             },
@@ -47,6 +49,7 @@ fun WebScreen(
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                        tint = color_top_app_bar_onContainer,
                         contentDescription = null
                     )
                 }

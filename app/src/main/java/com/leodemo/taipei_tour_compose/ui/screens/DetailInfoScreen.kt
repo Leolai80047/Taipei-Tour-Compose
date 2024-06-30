@@ -3,6 +3,7 @@ package com.leodemo.taipei_tour_compose.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
@@ -36,6 +37,7 @@ import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_hyper_link_text
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
+import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.HyperLinkText
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 
@@ -56,6 +58,7 @@ fun DetailInfoScreen(
             title = {
                 Text(
                     text = stringResource(R.string.app_name),
+                    color = color_top_app_bar_onContainer,
                     fontSize = 20.dp.dpToSp()
                 )
             },
@@ -65,6 +68,7 @@ fun DetailInfoScreen(
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                        tint = color_top_app_bar_onContainer,
                         contentDescription = null
                     )
                 }
@@ -72,6 +76,7 @@ fun DetailInfoScreen(
         )
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .verticalScroll(scrollState)
                 .background(color_attraction_main_background)
         ) {
@@ -125,7 +130,7 @@ fun DetailInfoScreen(
                             start.linkTo(description.start)
                             end.linkTo(description.end)
                         },
-                        text = item.address
+                        text = "${stringResource(R.string.address)}\n${item.address}"
                     )
                     Text(
                         modifier = Modifier.constrainAs(lastUpdate) {
@@ -134,7 +139,7 @@ fun DetailInfoScreen(
                             start.linkTo(address.start)
                             end.linkTo(address.end)
                         },
-                        text = item.modified
+                        text = "${stringResource(R.string.last_update_time)}\n${item.modified}"
                     )
                     HyperLinkText(
                         modifier = Modifier
