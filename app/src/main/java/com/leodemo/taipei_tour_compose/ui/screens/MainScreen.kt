@@ -1,8 +1,10 @@
 package com.leodemo.taipei_tour_compose.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -20,6 +22,7 @@ import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.R
 import com.leodemo.taipei_tour_compose.ui.components.AttractionPager
 import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
+import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
@@ -31,7 +34,11 @@ fun MainScreen(
     onItemClick: (AttractionResponse.Data) -> Unit
 ) {
     val pager = viewModel.attractionPager.collectAsLazyPagingItems()
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color_attraction_main_background)
+    ) {
         CenterAlignedTopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = color_top_app_bar_container

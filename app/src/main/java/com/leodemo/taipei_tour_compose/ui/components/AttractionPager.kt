@@ -28,6 +28,7 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
+import com.leodemo.taipei_tour_compose.ui.utils.ShimmerAttractionItem
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -35,9 +36,18 @@ fun AttractionPager(
     pager: LazyPagingItems<AttractionResponse.Data>,
     onItemClick: (AttractionResponse.Data) -> Unit
 ) {
-    when (pager.loadState.refresh) {
-        LoadState.Loading -> {}
-        is LoadState.Error -> {}
+    when {
+        pager.loadState.refresh is LoadState.Loading -> {
+            ShimmerAttractionItem(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(5.dp)
+            )
+        }
+        pager.loadState.refresh is LoadState.Error || pager.loadState.append is LoadState.Error -> {
+
+        }
         else -> {
             var refreshing by remember {
                 mutableStateOf(false)
@@ -58,7 +68,6 @@ fun AttractionPager(
             ) {
                 LazyColumn(
                     modifier = Modifier
-                        .background(color_attraction_main_background)
                         .padding(horizontal = 5.dp)
 
                 ) {
@@ -83,6 +92,16 @@ fun AttractionPager(
                     }
                     item {
                         Spacer(modifier = Modifier.height(5.dp))
+                    }
+                    if (pager.loadState.append is LoadState.Loading) {
+                        item {
+                            ShimmerAttractionItem(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight()
+                                    .padding(5.dp)
+                            )
+                        }
                     }
                 }
                 PullRefreshIndicator(
