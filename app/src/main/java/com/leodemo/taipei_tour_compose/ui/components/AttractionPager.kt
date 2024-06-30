@@ -3,6 +3,7 @@ package com.leodemo.taipei_tour_compose.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,6 +30,7 @@ fun AttractionPager(
         else -> {
             LazyColumn(
                 modifier = Modifier
+                    .fillMaxSize()
                     .background(color_attraction_main_background)
                     .padding(horizontal = 5.dp)
 
