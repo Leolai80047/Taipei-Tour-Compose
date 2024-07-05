@@ -12,9 +12,8 @@ import com.leodemo.taipei_tour_compose.ui.screens.Screen
 import com.leodemo.taipei_tour_compose.ui.screens.WebScreen
 
 @Composable
-fun Navigation() {
+fun Navigation(viewModel: MainViewModel = hiltViewModel()) {
     val navController = rememberNavController()
-    val viewModel: MainViewModel = hiltViewModel()
     NavHost(navController = navController, startDestination = Screen.MainScreen) {
         composable<Screen.MainScreen> {
             MainScreen(

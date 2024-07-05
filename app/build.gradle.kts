@@ -45,6 +45,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.2"
     }
+    androidResources {
+        generateLocaleConfig = true
+    }
 }
 
 dependencies {
@@ -89,4 +92,7 @@ dependencies {
 
     // glide
     implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+
+    // app compat
+    implementation("androidx.appcompat:appcompat:1.7.0")
 }
