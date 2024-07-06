@@ -1,5 +1,6 @@
 package com.leodemo.taipei_tour_compose.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,15 +20,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.R
-import com.leodemo.taipei_tour_compose.presentation.utils.LocaleUtils
 import com.leodemo.taipei_tour_compose.presentation.utils.SupportLanguageEnum
 import com.leodemo.taipei_tour_compose.ui.components.AttractionPager
 import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
@@ -36,14 +34,16 @@ import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.ChooseLanguageDialog
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = hiltViewModel(),
+    localizeContext: Context,
+    onLocaleChange: (Locale) -> Unit,
     onItemClick: (AttractionResponse.Data) -> Unit
 ) {
-    val context = LocalContext.current
     val pager = viewModel.attractionPager.collectAsLazyPagingItems()
     var showDialog by remember {
         mutableStateOf(false)
@@ -60,7 +60,7 @@ fun MainScreen(
                 ),
                 title = {
                     Text(
-                        text = stringResource(R.string.app_name),
+                        text = localizeContext.getString(R.string.app_name),
                         color = color_top_app_bar_onContainer,
                         fontSize = 20.dp.dpToSp()
                     )
@@ -88,11 +88,10 @@ fun MainScreen(
                         showDialog = false
                     },
                     onSelect = { language ->
+                        val locale = SupportLanguageEnum.getLocale(language)
                         viewModel.currentLanguage = language
-                        LocaleUtils.setLocale(
-                            context,
-                            SupportLanguageEnum.getLocale(language)
-                        )
+                        onLocaleChange(locale)
+                        pager.refresh()
                         showDialog = false
                     }
                 )

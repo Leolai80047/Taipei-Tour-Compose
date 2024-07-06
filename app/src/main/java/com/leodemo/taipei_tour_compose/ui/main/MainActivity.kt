@@ -25,12 +25,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLocaleSetting() {
         if (viewModel.currentLanguage.isNotEmpty()) return
+
         val locale = LocaleUtils.getLocale(this).get(0) ?: throw Exception("Locale is empty!")
         val language = SupportLanguageEnum.getLanguage(locale)
-        viewModel.currentLanguage =
+        val chosenLanguage =
             SupportLanguageEnum.getSupportLanguageList().firstOrNull { supportLanguage ->
                 supportLanguage == language
-            } ?: throw Exception("No match language")
-        LocaleUtils.setLocale(this, locale)
+            } ?: LocaleUtils.DEFAULT_LANGUAGE
+        val chosenLocale = SupportLanguageEnum.getLocale(chosenLanguage)
+
+        viewModel.currentLanguage = chosenLanguage
+        LocaleUtils.setLocale(this, chosenLocale)
     }
 }

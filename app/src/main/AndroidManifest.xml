@@ -26,6 +26,7 @@
         </service>
 
         <activity android:name=".ui.main.MainActivity"
+            android:configChanges="locale|layoutDirection"
             android:exported="true">
 
             <intent-filter>
