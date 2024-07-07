@@ -2,6 +2,8 @@ package com.leodemo.taipei_tour_compose.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour.data.repository.attraction.AttractionInteractor
 import com.leodemo.taipei_tour_compose.domain.GetSettingLanguageUseCase
@@ -15,7 +17,7 @@ class MainViewModel @Inject constructor(
     getSettingLanguageUseCase: GetSettingLanguageUseCase,
     private val putSettingLanguageUseCase: PutSettingLanguageUseCase
 ) : ViewModel() {
-    var attractionPager = attractionRepository.getAttractionPagingSource()
+    var attractionPager = attractionRepository.getAttractionPagingSource().cachedIn(viewModelScope)
     val currentItem = MutableLiveData<AttractionResponse.Data>()
     var currentLanguage: String = getSettingLanguageUseCase()
         set(value) {
