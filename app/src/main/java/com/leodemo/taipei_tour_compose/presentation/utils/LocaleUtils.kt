@@ -19,9 +19,8 @@ object LocaleUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val localeManager = context.getSystemService(LocaleManager::class.java)
             localeManager.applicationLocales = LocaleList(locale)
-        } else {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
         }
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
     }
 
     fun getLocale(context: Context): LocaleListCompat {

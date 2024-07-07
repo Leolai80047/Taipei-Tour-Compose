@@ -1,6 +1,5 @@
 package com.leodemo.taipei_tour_compose.ui.screens
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,6 +32,7 @@ import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.ChooseLanguageDialog
+import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 import java.util.Locale
 
@@ -40,7 +40,6 @@ import java.util.Locale
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = hiltViewModel(),
-    localizeContext: Context,
     onLocaleChange: (Locale) -> Unit,
     onItemClick: (AttractionResponse.Data) -> Unit
 ) {
@@ -60,7 +59,7 @@ fun MainScreen(
                 ),
                 title = {
                     Text(
-                        text = localizeContext.getString(R.string.app_name),
+                        text = LocalizeContext.current.getString(R.string.app_name),
                         color = color_top_app_bar_onContainer,
                         fontSize = 20.dp.dpToSp()
                     )

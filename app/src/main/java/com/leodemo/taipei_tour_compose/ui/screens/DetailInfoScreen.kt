@@ -22,7 +22,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -39,6 +38,7 @@ import com.leodemo.taipei_tour_compose.ui.theme.color_hyper_link_text
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.HyperLinkText
+import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
@@ -57,7 +57,7 @@ fun DetailInfoScreen(
             ),
             title = {
                 Text(
-                    text = stringResource(R.string.app_name),
+                    text = LocalizeContext.current.getString(R.string.app_name),
                     color = color_top_app_bar_onContainer,
                     fontSize = 20.dp.dpToSp()
                 )
@@ -130,7 +130,7 @@ fun DetailInfoScreen(
                             start.linkTo(description.start)
                             end.linkTo(description.end)
                         },
-                        text = "${stringResource(R.string.address)}\n${item.address}"
+                        text = "${LocalizeContext.current.getString(R.string.address)}\n${item.address}"
                     )
                     Text(
                         modifier = Modifier.constrainAs(lastUpdate) {
@@ -139,7 +139,7 @@ fun DetailInfoScreen(
                             start.linkTo(address.start)
                             end.linkTo(address.end)
                         },
-                        text = "${stringResource(R.string.last_update_time)}\n${item.modified}"
+                        text = "${LocalizeContext.current.getString(R.string.last_update_time)}\n${item.modified}"
                     )
                     HyperLinkText(
                         modifier = Modifier

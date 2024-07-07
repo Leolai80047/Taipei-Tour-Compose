@@ -1,6 +1,7 @@
 package com.leodemo.taipei_tour_compose.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,6 +17,7 @@ import com.leodemo.taipei_tour_compose.ui.screens.DetailInfoScreen
 import com.leodemo.taipei_tour_compose.ui.screens.MainScreen
 import com.leodemo.taipei_tour_compose.ui.screens.Screen
 import com.leodemo.taipei_tour_compose.ui.screens.WebScreen
+import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 
 @Composable
 fun Navigation(viewModel: MainViewModel = hiltViewModel()) {
@@ -29,39 +31,40 @@ fun Navigation(viewModel: MainViewModel = hiltViewModel()) {
             )
         )
     }
-    NavHost(navController = navController, startDestination = Screen.MainScreen) {
-        composable<Screen.MainScreen> {
-            MainScreen(
-                viewModel = viewModel,
-                localizeContext = localizeContext,
-                onLocaleChange = { locale ->
-                    localizeContext = LocaleUtils.getLocalizeContext(context, locale)
-                    LocaleUtils.setLocale(context, locale)
-                },
-                onItemClick = {
-                    viewModel.currentItem.value = it
-                    navController.navigate(Screen.DetailInfoScreen)
-                }
-            )
-        }
-        composable<Screen.DetailInfoScreen> {
-            DetailInfoScreen(
-                viewModel = viewModel,
-                onNavigateWebScreen = {
-                    navController.navigate(Screen.WebScreen)
-                },
-                onBack = {
-                    navController.navigateUp()
-                }
-            )
-        }
-        composable<Screen.WebScreen> {
-            WebScreen(
-                viewModel = viewModel,
-                onBack = {
-                    navController.navigateUp()
-                }
-            )
+    CompositionLocalProvider(LocalizeContext provides localizeContext) {
+        NavHost(navController = navController, startDestination = Screen.MainScreen) {
+            composable<Screen.MainScreen> {
+                MainScreen(
+                    viewModel = viewModel,
+                    onLocaleChange = { locale ->
+                        localizeContext = LocaleUtils.getLocalizeContext(context, locale)
+                        LocaleUtils.setLocale(context, locale)
+                    },
+                    onItemClick = {
+                        viewModel.currentItem.value = it
+                        navController.navigate(Screen.DetailInfoScreen)
+                    }
+                )
+            }
+            composable<Screen.DetailInfoScreen> {
+                DetailInfoScreen(
+                    viewModel = viewModel,
+                    onNavigateWebScreen = {
+                        navController.navigate(Screen.WebScreen)
+                    },
+                    onBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable<Screen.WebScreen> {
+                WebScreen(
+                    viewModel = viewModel,
+                    onBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
         }
     }
 }

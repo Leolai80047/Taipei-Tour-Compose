@@ -43,7 +43,7 @@ fun ChooseLanguageDialog(
                     .height(60.dp)
                     .background(color_top_app_bar_container)
                     .wrapContentHeight(),
-                text = stringResource(R.string.please_select_language),
+                text = LocalizeContext.current.getString(R.string.please_select_language),
                 color = color_top_app_bar_onContainer,
                 textAlign = TextAlign.Center
             )
