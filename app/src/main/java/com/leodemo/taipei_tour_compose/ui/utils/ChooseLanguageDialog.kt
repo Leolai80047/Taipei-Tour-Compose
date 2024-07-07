@@ -53,6 +53,7 @@ fun ChooseLanguageDialog(
                 itemsIndexed(SupportLanguageEnum.getSupportLanguageList()) { index, language ->
                     Text(
                         modifier = Modifier
+                            .fillMaxWidth()
                             .padding(10.dp)
                             .clickable {
                                 onSelect(language)
