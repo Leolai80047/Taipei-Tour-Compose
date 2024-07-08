@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.leodemo.taipei_tour_compose.presentation.utils.LocaleUtils
 import com.leodemo.taipei_tour_compose.presentation.utils.SupportLanguageEnum
 import com.leodemo.taipei_tour_compose.ui.navigation.Navigation
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         initLocaleSetting()
         setContent {
             AppTheme {
