@@ -1,11 +1,15 @@
 package com.leodemo.taipei_tour_compose.ui.navigation
 
+import android.net.Uri
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -17,6 +21,7 @@ import com.leodemo.taipei_tour_compose.ui.screens.DetailInfoScreen
 import com.leodemo.taipei_tour_compose.ui.screens.MainScreen
 import com.leodemo.taipei_tour_compose.ui.screens.Screen
 import com.leodemo.taipei_tour_compose.ui.screens.WebScreen
+import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 
 @Composable
@@ -50,7 +55,18 @@ fun Navigation(viewModel: MainViewModel = hiltViewModel()) {
                 DetailInfoScreen(
                     viewModel = viewModel,
                     onNavigateWebScreen = {
-                        navController.navigate(Screen.WebScreen)
+//                        navController.navigate(Screen.WebScreen)
+                        val params = CustomTabColorSchemeParams.Builder()
+                            .setToolbarColor(color_top_app_bar_container.toArgb())
+                            .build()
+                        CustomTabsIntent.Builder()
+                            .setDefaultColorSchemeParams(params)
+                            .setShowTitle(true)
+                            .build()
+                            .launchUrl(
+                                context,
+                                Uri.parse(viewModel.currentItem.value?.url ?: "about:blank")
+                            )
                     },
                     onBack = {
                         navController.navigateUp()
