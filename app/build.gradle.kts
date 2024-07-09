@@ -98,4 +98,7 @@ dependencies {
 
     // splash screen
     implementation("androidx.core:core-splashscreen:1.0.0")
+
+    // chrome custom tab
+    implementation("androidx.browser:browser:1.8.0")
 }
