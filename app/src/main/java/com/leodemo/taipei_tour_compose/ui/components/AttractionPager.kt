@@ -15,6 +15,7 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +37,16 @@ fun AttractionPager(
     pager: LazyPagingItems<AttractionResponse.Data>,
     onItemClick: (AttractionResponse.Data) -> Unit
 ) {
+    var showAlertDialog by remember {
+        mutableStateOf(false)
+    }
+    LaunchedEffect(pager.loadState) {
+        when {
+            pager.loadState.refresh is LoadState.Error || pager.loadState.append is LoadState.Error -> {
+                showAlertDialog = true
+            }
+        }
+    }
     when {
         pager.loadState.refresh is LoadState.Loading -> {
             ShimmerAttractionItem(
@@ -45,9 +56,21 @@ fun AttractionPager(
                     .padding(5.dp)
             )
         }
-        pager.loadState.refresh is LoadState.Error || pager.loadState.append is LoadState.Error -> {
 
+        pager.loadState.refresh is LoadState.Error -> {
+            val error = (pager.loadState.refresh as LoadState.Error).error
+            AttractionAlertDialog(showDialog = showAlertDialog, content = error.message ?: "") {
+                showAlertDialog = false
+            }
         }
+
+        pager.loadState.append is LoadState.Error -> {
+            val error = (pager.loadState.append as LoadState.Error).error
+            AttractionAlertDialog(showDialog = showAlertDialog, content = error.message ?: "") {
+                showAlertDialog = false
+            }
+        }
+
         else -> {
             var refreshing by remember {
                 mutableStateOf(false)
