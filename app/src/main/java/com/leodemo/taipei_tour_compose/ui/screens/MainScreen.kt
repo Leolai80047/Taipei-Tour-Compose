@@ -1,5 +1,8 @@
 package com.leodemo.taipei_tour_compose.ui.screens
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -36,10 +39,11 @@ import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
-fun MainScreen(
+fun SharedTransitionScope.MainScreen(
     viewModel: MainViewModel = hiltViewModel(),
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onLocaleChange: (Locale) -> Unit,
     onItemClick: (AttractionResponse.Data) -> Unit
 ) {
@@ -79,6 +83,7 @@ fun MainScreen(
             )
             AttractionPager(
                 pager = pager,
+                animatedVisibilityScope = animatedVisibilityScope,
                 onItemClick = onItemClick
             )
             if (showDialog) {

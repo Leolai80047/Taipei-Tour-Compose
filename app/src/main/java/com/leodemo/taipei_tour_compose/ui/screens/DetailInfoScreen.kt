@@ -1,11 +1,16 @@
 package com.leodemo.taipei_tour_compose.ui.screens
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -25,8 +30,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
@@ -41,10 +44,14 @@ import com.leodemo.taipei_tour_compose.ui.utils.HyperLinkText
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class,
+    ExperimentalSharedTransitionApi::class
+)
 @Composable
-fun DetailInfoScreen(
+fun SharedTransitionScope.DetailInfoScreen(
     viewModel: MainViewModel = hiltViewModel(),
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onNavigateWebScreen: () -> Unit,
     onBack: () -> Unit
 ) {
@@ -79,83 +86,52 @@ fun DetailInfoScreen(
                 .fillMaxSize()
                 .verticalScroll(scrollState)
                 .background(color_attraction_main_background)
+                .padding(horizontal = 5.dp)
         ) {
             data?.let { item ->
-                ConstraintLayout {
-                    val (cover, title, description, address, lastUpdate, url) = createRefs()
-
-                    GlideImage(
-                        modifier = Modifier
-                            .constrainAs(cover) {
-                                top.linkTo(parent.top)
-                                start.linkTo(parent.start)
-                                end.linkTo(parent.end)
-                            }
-                            .fillMaxWidth()
-                            .height(200.dp),
-                        model = item.getImage(),
-                        contentScale = ContentScale.Fit,
-                        alignment = Alignment.Center,
-                        loading = placeholder(R.drawable.img_placeholder),
-                        failure = placeholder(R.drawable.img_not_found),
-                        contentDescription = null
-                    )
-                    Text(
-                        modifier = Modifier.constrainAs(title) {
-                            width = Dimension.fillToConstraints
-                            height = Dimension.wrapContent
-                            top.linkTo(cover.bottom, 20.dp)
-                            start.linkTo(parent.start, 5.dp)
-                            end.linkTo(parent.end, 5.dp)
-                        },
-                        text = item.name,
-                        fontSize = 20.dp.dpToSp(),
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text(
-                        modifier = Modifier.constrainAs(description) {
-                            width = Dimension.fillToConstraints
-                            top.linkTo(title.bottom, 20.dp)
-                            start.linkTo(title.start)
-                            end.linkTo(title.end)
-                        },
-                        text = item.introduction
-                    )
-                    Text(
-                        modifier = Modifier.constrainAs(address) {
-                            width = Dimension.fillToConstraints
-                            top.linkTo(description.bottom, 30.dp)
-                            start.linkTo(description.start)
-                            end.linkTo(description.end)
-                        },
-                        text = "${LocalizeContext.current.getString(R.string.address)}\n${item.address}"
-                    )
-                    Text(
-                        modifier = Modifier.constrainAs(lastUpdate) {
-                            width = Dimension.fillToConstraints
-                            top.linkTo(address.bottom, 30.dp)
-                            start.linkTo(address.start)
-                            end.linkTo(address.end)
-                        },
-                        text = "${LocalizeContext.current.getString(R.string.last_update_time)}\n${item.modified}"
-                    )
-                    HyperLinkText(
-                        modifier = Modifier
-                            .constrainAs(url) {
-                                width = Dimension.fillToConstraints
-                                top.linkTo(lastUpdate.bottom, 30.dp)
-                                start.linkTo(lastUpdate.start)
-                                end.linkTo(lastUpdate.end)
-                            }
-                            .clickable {
-                                onNavigateWebScreen()
-                            },
-                        text = item.url,
-                        linkColor = color_hyper_link_text
-                    )
-                }
+                GlideImage(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .sharedElement(
+                            state = rememberSharedContentState(key = "image-${item.id}"),
+                            animatedVisibilityScope = animatedVisibilityScope,
+                        ),
+                    model = item.getImage(),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.Center,
+                    loading = placeholder(R.drawable.img_placeholder),
+                    failure = placeholder(R.drawable.img_not_found),
+                    contentDescription = null
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = item.name,
+                    fontSize = 20.dp.dpToSp(),
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = item.introduction
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                Text(
+                    text = "${LocalizeContext.current.getString(R.string.address)}\n${item.address}"
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                Text(
+                    text = "${LocalizeContext.current.getString(R.string.last_update_time)}\n${item.modified}"
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                HyperLinkText(
+                    modifier = Modifier.clickable {
+                        onNavigateWebScreen()
+                    },
+                    text = item.url,
+                    linkColor = color_hyper_link_text
+                )
             }
 
         }

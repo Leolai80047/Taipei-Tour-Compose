@@ -1,5 +1,8 @@
 package com.leodemo.taipei_tour_compose.ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -31,10 +34,11 @@ import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.utils.ShimmerAttractionItem
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalSharedTransitionApi::class)
 @Composable
-fun AttractionPager(
+fun SharedTransitionScope.AttractionPager(
     pager: LazyPagingItems<AttractionResponse.Data>,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onItemClick: (AttractionResponse.Data) -> Unit
 ) {
     var showAlertDialog by remember {
@@ -108,6 +112,7 @@ fun AttractionPager(
                                     .fillMaxWidth()
                                     .wrapContentHeight()
                                     .clickable { onItemClick(this) },
+                                animatedVisibilityScope = animatedVisibilityScope,
                                 item = this
                             )
                             Spacer(modifier = Modifier.height(10.dp))
