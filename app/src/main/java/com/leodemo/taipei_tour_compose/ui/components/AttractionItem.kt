@@ -61,7 +61,7 @@ fun SharedTransitionScope.AttractionItem(
                 .sharedElement(
                     state = rememberSharedContentState(key = "image-${item.id}"),
                     animatedVisibilityScope = animatedVisibilityScope,
-                ),
+                ).skipToLookaheadSize(),
             model = item.getImage(),
             loading = placeholder(R.drawable.img_placeholder),
             failure = placeholder(R.drawable.img_not_found),

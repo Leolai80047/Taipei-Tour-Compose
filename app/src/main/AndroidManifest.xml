@@ -27,6 +27,7 @@
         <activity android:name=".ui.main.MainActivity"
             android:configChanges="locale|layoutDirection"
             android:theme="@style/Theme.TaipeiTour_Compose.CustomSplashScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
 
             <intent-filter>
