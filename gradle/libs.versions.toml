@@ -14,7 +14,8 @@ paging = "3.3.0"
 hiltNavigationCompose = "1.0.0"
 navigationCompose = "2.8.0-beta04"
 kotlinSerializationJson = "1.6.3"
-pluginkotlinSerializationJson = "1.9.0"
+pluginKotlinSerializationJson = "1.9.0"
+pluginKotlinParcelize = "1.9.0"
 dagger = "2.48"
 preferenceKtx = "1.2.1"
 retrofit = "2.9.0"
@@ -58,6 +59,7 @@ com-github-bumptech-glide-compose = { group = "com.github.bumptech.glide", name 
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "pluginkotlinSerializationJson" }
+jetbrains-kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "pluginKotlinSerializationJson" }
+jetbrains-kotlin-plugin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "pluginKotlinParcelize" }
 jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }

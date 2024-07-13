@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.jetbrains.kotlin.plugin.serialization)
     alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.jetbrains.kotlin.plugin.parcelize)
 }
 
 android {

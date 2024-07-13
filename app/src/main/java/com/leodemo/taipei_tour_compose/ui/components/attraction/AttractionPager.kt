@@ -30,15 +30,15 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
-import com.leodemo.taipei_tour.data.api.AttractionResponse
+import com.leodemo.taipei_tour_compose.domain.model.AttractionInfo
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun SharedTransitionScope.AttractionPager(
-    pager: LazyPagingItems<AttractionResponse.Data>,
+    pager: LazyPagingItems<AttractionInfo>,
     animatedVisibilityScope: AnimatedVisibilityScope,
-    onItemClick: (AttractionResponse.Data) -> Unit
+    onItemClick: (AttractionInfo) -> Unit
 ) {
     var showAlertDialog by remember {
         mutableStateOf(false)

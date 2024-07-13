@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
-import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.R
+import com.leodemo.taipei_tour_compose.domain.model.AttractionInfo
 import com.leodemo.taipei_tour_compose.ui.theme.color_item_attraction_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_shadow_tint
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
@@ -39,7 +39,7 @@ import com.leodemo.taipei_tour_compose.ui.utils.modifier.shadow
 fun SharedTransitionScope.AttractionItem(
     modifier: Modifier,
     animatedVisibilityScope: AnimatedVisibilityScope,
-    item: AttractionResponse.Data
+    item: AttractionInfo
 ) {
     Row(
         modifier = modifier
@@ -61,8 +61,9 @@ fun SharedTransitionScope.AttractionItem(
                 .sharedElement(
                     state = rememberSharedContentState(key = "image-${item.id}"),
                     animatedVisibilityScope = animatedVisibilityScope,
-                ).skipToLookaheadSize(),
-            model = item.getImage(),
+                )
+                .skipToLookaheadSize(),
+            model = item.imageUrl,
             loading = placeholder(R.drawable.img_placeholder),
             failure = placeholder(R.drawable.img_not_found),
             contentScale = ContentScale.Crop,

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         initLocaleSetting()
         setContent {
             AppTheme {
-                AttractionNavigation(viewModel)
+                AttractionNavigation()
             }
         }
     }

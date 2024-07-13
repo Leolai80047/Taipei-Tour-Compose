@@ -1,8 +1,5 @@
 package com.leodemo.taipei_tour_compose.ui.navigation
 
-import android.net.Uri
-import androidx.browser.customtabs.CustomTabColorSchemeParams
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
@@ -11,24 +8,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.leodemo.taipei_tour_compose.ui.utils.language.LocaleUtils
-import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
-import com.leodemo.taipei_tour_compose.ui.screens.DetailInfoScreen
-import com.leodemo.taipei_tour_compose.ui.screens.MainScreen
 import com.leodemo.taipei_tour_compose.ui.screens.Screen
-import com.leodemo.taipei_tour_compose.ui.screens.WebScreen
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
+import com.leodemo.taipei_tour_compose.ui.screens.attraction.AttractionScreen
+import com.leodemo.taipei_tour_compose.ui.screens.detail.DetailInfoScreen
+import com.leodemo.taipei_tour_compose.ui.screens.web.WebScreen
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
+import com.leodemo.taipei_tour_compose.ui.utils.language.LocaleUtils
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun AttractionNavigation(viewModel: MainViewModel = hiltViewModel()) {
+fun AttractionNavigation() {
     val navController = rememberNavController()
     val context = LocalContext.current
     var localizeContext by remember {
@@ -41,38 +34,37 @@ fun AttractionNavigation(viewModel: MainViewModel = hiltViewModel()) {
     }
     CompositionLocalProvider(LocalizeContext provides localizeContext) {
         SharedTransitionLayout {
-            NavHost(navController = navController, startDestination = Screen.MainScreen) {
-                composable<Screen.MainScreen> {
-                    MainScreen(
-                        viewModel = viewModel,
+            NavHost(navController = navController, startDestination = Screen.AttractionScreen) {
+                composable<Screen.AttractionScreen> {
+                    AttractionScreen(
                         animatedVisibilityScope = this,
                         onLocaleChange = { locale ->
                             localizeContext = LocaleUtils.getLocalizeContext(context, locale)
                             LocaleUtils.setLocale(context, locale)
                         },
-                        onItemClick = {
-                            viewModel.currentItem.value = it
-                            navController.navigate(Screen.DetailInfoScreen)
+                        onItemClick = { info ->
+                            navController.navigate(Screen.DetailInfoScreen(info))
                         }
                     )
                 }
-                composable<Screen.DetailInfoScreen> {
+                composable<Screen.DetailInfoScreen>(
+                    typeMap = Screen.DetailInfoScreen.typeMap
+                ) {
                     DetailInfoScreen(
-                        viewModel = viewModel,
                         animatedVisibilityScope = this,
-                        onNavigateWebScreen = {
-//                        navController.navigate(Screen.WebScreen)
-                            val params = CustomTabColorSchemeParams.Builder()
-                                .setToolbarColor(color_top_app_bar_container.toArgb())
-                                .build()
-                            CustomTabsIntent.Builder()
-                                .setDefaultColorSchemeParams(params)
-                                .setShowTitle(true)
-                                .build()
-                                .launchUrl(
-                                    context,
-                                    Uri.parse(viewModel.currentItem.value?.url ?: "about:blank")
-                                )
+                        onNavigateWebScreen = { url ->
+                            navController.navigate(Screen.WebScreen(url))
+//                            val params = CustomTabColorSchemeParams.Builder()
+//                                .setToolbarColor(color_top_app_bar_container.toArgb())
+//                                .build()
+//                            CustomTabsIntent.Builder()
+//                                .setDefaultColorSchemeParams(params)
+//                                .setShowTitle(true)
+//                                .build()
+//                                .launchUrl(
+//                                    context,
+//                                    Uri.parse(url)
+//                                )
                         },
                         onBack = {
                             navController.navigateUp()
@@ -81,7 +73,6 @@ fun AttractionNavigation(viewModel: MainViewModel = hiltViewModel()) {
                 }
                 composable<Screen.WebScreen> {
                     WebScreen(
-                        viewModel = viewModel,
                         onBack = {
                             navController.navigateUp()
                         }

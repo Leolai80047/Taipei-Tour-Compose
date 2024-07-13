@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour_compose.domain
+package com.leodemo.taipei_tour_compose.domain.usecase
 
 import com.leodemo.taipei_tour.data.repository.language.AttractionLanguageInteractor
 import javax.inject.Inject

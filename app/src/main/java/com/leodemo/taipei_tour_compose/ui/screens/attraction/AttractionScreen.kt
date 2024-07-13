@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour_compose.ui.screens
+package com.leodemo.taipei_tour_compose.ui.screens.attraction
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -26,26 +26,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.R
-import com.leodemo.taipei_tour_compose.ui.utils.language.SupportLanguageEnum
+import com.leodemo.taipei_tour_compose.domain.model.AttractionInfo
 import com.leodemo.taipei_tour_compose.ui.components.attraction.AttractionPager
-import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
+import com.leodemo.taipei_tour_compose.ui.components.attraction.ChooseLanguageDialog
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
-import com.leodemo.taipei_tour_compose.ui.components.attraction.ChooseLanguageDialog
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
+import com.leodemo.taipei_tour_compose.ui.utils.language.SupportLanguageEnum
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
-fun SharedTransitionScope.MainScreen(
-    viewModel: MainViewModel = hiltViewModel(),
+fun SharedTransitionScope.AttractionScreen(
+    viewModel: AttractionViewModel = hiltViewModel(),
     animatedVisibilityScope: AnimatedVisibilityScope,
     onLocaleChange: (Locale) -> Unit,
-    onItemClick: (AttractionResponse.Data) -> Unit
+    onItemClick: (AttractionInfo) -> Unit
 ) {
     val pager = viewModel.attractionPager.collectAsLazyPagingItems()
     var showDialog by remember {
@@ -93,8 +92,8 @@ fun SharedTransitionScope.MainScreen(
                     },
                     onSelect = { language ->
                         val locale = SupportLanguageEnum.getLocale(language)
-                        viewModel.currentLanguage = language
                         onLocaleChange(locale)
+                        viewModel.setLanguage(language)
                         pager.refresh()
                         showDialog = false
                     }

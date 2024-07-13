@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour_compose.ui.screens
+package com.leodemo.taipei_tour_compose.ui.screens.detail
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -35,12 +35,11 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.leodemo.taipei_tour_compose.R
-import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
+import com.leodemo.taipei_tour_compose.ui.components.detail.HyperLinkText
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_hyper_link_text
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
-import com.leodemo.taipei_tour_compose.ui.components.detail.HyperLinkText
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 
@@ -50,12 +49,12 @@ import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 )
 @Composable
 fun SharedTransitionScope.DetailInfoScreen(
-    viewModel: MainViewModel = hiltViewModel(),
+    viewModel: DetailViewModel = hiltViewModel(),
     animatedVisibilityScope: AnimatedVisibilityScope,
-    onNavigateWebScreen: () -> Unit,
+    onNavigateWebScreen: (String) -> Unit,
     onBack: () -> Unit
 ) {
-    val data by viewModel.currentItem.observeAsState()
+    val data by viewModel.item.observeAsState()
     val scrollState = rememberScrollState()
     Column {
         CenterAlignedTopAppBar(
@@ -97,7 +96,7 @@ fun SharedTransitionScope.DetailInfoScreen(
                             state = rememberSharedContentState(key = "image-${item.id}"),
                             animatedVisibilityScope = animatedVisibilityScope,
                         ),
-                    model = item.getImage(),
+                    model = item.imageUrl,
                     contentScale = ContentScale.Fit,
                     alignment = Alignment.Center,
                     loading = placeholder(R.drawable.img_placeholder),
@@ -127,7 +126,7 @@ fun SharedTransitionScope.DetailInfoScreen(
                 Spacer(modifier = Modifier.height(30.dp))
                 HyperLinkText(
                     modifier = Modifier.clickable {
-                        onNavigateWebScreen()
+                        onNavigateWebScreen(item.url)
                     },
                     text = item.url,
                     linkColor = color_hyper_link_text
