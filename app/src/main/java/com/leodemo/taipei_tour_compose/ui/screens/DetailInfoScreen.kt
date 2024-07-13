@@ -40,7 +40,7 @@ import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_hyper_link_text
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
-import com.leodemo.taipei_tour_compose.ui.utils.HyperLinkText
+import com.leodemo.taipei_tour_compose.ui.components.detail.HyperLinkText
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 

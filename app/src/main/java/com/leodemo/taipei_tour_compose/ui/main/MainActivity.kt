@@ -5,9 +5,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.leodemo.taipei_tour_compose.presentation.utils.LocaleUtils
-import com.leodemo.taipei_tour_compose.presentation.utils.SupportLanguageEnum
-import com.leodemo.taipei_tour_compose.ui.navigation.Navigation
+import com.leodemo.taipei_tour_compose.ui.utils.language.LocaleUtils
+import com.leodemo.taipei_tour_compose.ui.utils.language.SupportLanguageEnum
+import com.leodemo.taipei_tour_compose.ui.navigation.AttractionNavigation
 import com.leodemo.taipei_tour_compose.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         initLocaleSetting()
         setContent {
             AppTheme {
-                Navigation(viewModel)
+                AttractionNavigation(viewModel)
             }
         }
     }

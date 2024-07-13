@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour_compose.presentation.utils
+package com.leodemo.taipei_tour_compose.ui.utils.language
 
 import android.app.LocaleManager
 import android.content.Context

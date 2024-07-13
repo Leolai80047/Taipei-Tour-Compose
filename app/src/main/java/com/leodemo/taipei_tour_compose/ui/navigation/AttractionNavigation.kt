@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.leodemo.taipei_tour_compose.presentation.utils.LocaleUtils
+import com.leodemo.taipei_tour_compose.ui.utils.language.LocaleUtils
 import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
 import com.leodemo.taipei_tour_compose.ui.screens.DetailInfoScreen
 import com.leodemo.taipei_tour_compose.ui.screens.MainScreen
@@ -28,7 +28,7 @@ import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun Navigation(viewModel: MainViewModel = hiltViewModel()) {
+fun AttractionNavigation(viewModel: MainViewModel = hiltViewModel()) {
     val navController = rememberNavController()
     val context = LocalContext.current
     var localizeContext by remember {

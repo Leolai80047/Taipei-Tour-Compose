@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour_compose.ui.components
+package com.leodemo.taipei_tour_compose.ui.components.attraction
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour_compose.ui.components
+package com.leodemo.taipei_tour_compose.ui.components.attraction
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -32,7 +32,6 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
-import com.leodemo.taipei_tour_compose.ui.utils.ShimmerAttractionItem
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalSharedTransitionApi::class)
 @Composable

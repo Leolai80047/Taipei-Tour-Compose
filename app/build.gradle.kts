@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.jetbrains.kotlin.plugin.serialization)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -16,7 +16,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "DOMAIN", "\"https://www.travel.taipei/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,6 +51,9 @@ android {
 
 dependencies {
 
+    // implement submodule
+    implementation(project(path = ":taipeitour_core:app"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -59,46 +61,31 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // implement submodule
-    implementation(project(path = ":taipeitour_core:app"))
-
-
     // compose
-    val composeBom = platform("androidx.compose:compose-bom:2024.05.00")
-    implementation(composeBom)
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.activity:activity-compose:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material:material")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation("androidx.compose.runtime:runtime-livedata")
-    implementation("androidx.paging:paging-runtime:3.3.0")
-    implementation("androidx.paging:paging-compose:3.3.0")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("androidx.navigation:navigation-compose:2.8.0-beta04")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.andoridx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.org.jetbrain.kotlinx.serialization.json)
 
     // hilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
-
-    // retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.9.2")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
+    implementation(libs.com.google.dagger.hilt.android)
+    kapt(libs.com.google.dagger.hilt.android.compiler)
 
     // glide
-    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
-
-    // app compat
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation(libs.com.github.bumptech.glide.compose)
 
     // splash screen
-    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation(libs.androidx.core.splashscreen)
 
     // chrome custom tab
-    implementation("androidx.browser:browser:1.8.0")
+    implementation(libs.androidx.browser)
 }

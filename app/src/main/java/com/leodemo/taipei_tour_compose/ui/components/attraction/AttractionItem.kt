@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour_compose.ui.components
+package com.leodemo.taipei_tour_compose.ui.components.attraction
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -32,7 +32,7 @@ import com.leodemo.taipei_tour_compose.R
 import com.leodemo.taipei_tour_compose.ui.theme.color_item_attraction_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_shadow_tint
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
-import com.leodemo.taipei_tour_compose.ui.utils.shadow
+import com.leodemo.taipei_tour_compose.ui.utils.modifier.shadow
 
 @OptIn(ExperimentalGlideComposeApi::class, ExperimentalSharedTransitionApi::class)
 @Composable

@@ -28,13 +28,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour_compose.R
-import com.leodemo.taipei_tour_compose.presentation.utils.SupportLanguageEnum
-import com.leodemo.taipei_tour_compose.ui.components.AttractionPager
+import com.leodemo.taipei_tour_compose.ui.utils.language.SupportLanguageEnum
+import com.leodemo.taipei_tour_compose.ui.components.attraction.AttractionPager
 import com.leodemo.taipei_tour_compose.ui.main.MainViewModel
 import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
-import com.leodemo.taipei_tour_compose.ui.utils.ChooseLanguageDialog
+import com.leodemo.taipei_tour_compose.ui.components.attraction.ChooseLanguageDialog
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 import java.util.Locale
