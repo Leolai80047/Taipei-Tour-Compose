@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -37,6 +38,7 @@ import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 @Composable
 fun SharedTransitionScope.AttractionPager(
     pager: LazyPagingItems<AttractionInfo>,
+    listState: LazyListState,
     animatedVisibilityScope: AnimatedVisibilityScope,
     onItemClick: (AttractionInfo) -> Unit
 ) {
@@ -94,8 +96,8 @@ fun SharedTransitionScope.AttractionPager(
             ) {
                 LazyColumn(
                     modifier = Modifier
-                        .padding(horizontal = 5.dp)
-
+                        .padding(horizontal = 5.dp),
+                    state = listState
                 ) {
                     item {
                         Spacer(modifier = Modifier.height(5.dp))
