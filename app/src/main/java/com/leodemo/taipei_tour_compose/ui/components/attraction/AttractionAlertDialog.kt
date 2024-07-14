@@ -8,7 +8,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,8 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.leodemo.taipei_tour_compose.R
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 
@@ -44,14 +43,14 @@ fun AttractionAlertDialog(
                         .fillMaxWidth()
                         .height(60.dp)
                         .background(
-                            color = color_top_app_bar_container,
+                            color = MaterialTheme.colorScheme.primary,
                             shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
                         )
                         .wrapContentHeight(),
                     text = LocalizeContext.current.getString(R.string.system_error),
                     textAlign = TextAlign.Center,
                     fontSize = 20.dp.dpToSp(),
-                    color = color_top_app_bar_onContainer
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
                     modifier = Modifier

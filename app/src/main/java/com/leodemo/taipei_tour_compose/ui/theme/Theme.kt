@@ -12,10 +12,20 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 
-private val LightColors = lightColorScheme()
+private val LightColors = lightColorScheme(
+    primary = theme_light_primary,
+    onPrimary = theme_light_onPrimary,
+    secondary = theme_light_secondary,
+    secondaryContainer = theme_light_secondaryContainer
+)
 
 
-private val DarkColors = darkColorScheme()
+private val DarkColors = darkColorScheme(
+    primary = theme_dark_primary,
+    onPrimary = theme_dark_onPrimary,
+    secondary = theme_dark_secondary,
+    secondaryContainer = theme_dark_secondaryContainer
+)
 
 @Composable
 fun AppTheme(
@@ -33,7 +43,7 @@ fun AppTheme(
         SideEffect {
             val window = (view.context as Activity).window
             val insets = WindowCompat.getInsetsController(window, view)
-            window.statusBarColor = color_top_app_bar_container.toArgb() // choose a status bar color
+            window.statusBarColor = colors.primary.toArgb() // choose a status bar color
 //            window.navigationBarColor = colorScheme.whatever.toArgb() // choose a navigation bar color
             insets.isAppearanceLightStatusBars = !useDarkTheme
 //            insets.isAppearanceLightNavigationBars = !useDarkTheme

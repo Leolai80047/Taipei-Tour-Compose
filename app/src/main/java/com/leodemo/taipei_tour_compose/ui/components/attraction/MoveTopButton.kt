@@ -8,11 +8,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
 
 @Composable
 fun MoveTopButton(
@@ -20,6 +20,7 @@ fun MoveTopButton(
     visible: Boolean,
     onClick: () -> Unit,
 ) {
+    val backgroundColor = MaterialTheme.colorScheme.primary
     AnimatedVisibility(
         modifier = modifier,
         visible = visible,
@@ -35,7 +36,7 @@ fun MoveTopButton(
                 .size(60.dp)
                 .drawBehind {
                     drawCircle(
-                        color = color_top_app_bar_container,
+                        color = backgroundColor,
                         radius = 30.dp.toPx()
                     )
                 }

@@ -10,7 +10,8 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,8 +21,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.leodemo.taipei_tour_compose.R
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.language.SupportLanguageEnum
 
@@ -41,10 +40,10 @@ fun ChooseLanguageDialog(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
-                    .background(color_top_app_bar_container)
+                    .background(MaterialTheme.colorScheme.primary)
                     .wrapContentHeight(),
                 text = LocalizeContext.current.getString(R.string.please_select_language),
-                color = color_top_app_bar_onContainer,
+                color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center
             )
             LazyColumn(
@@ -61,7 +60,7 @@ fun ChooseLanguageDialog(
                         text = language
                     )
                     if (index != SupportLanguageEnum.getSupportLanguageList().lastIndex) {
-                        Divider(color = Color.Black, thickness = 1.dp)
+                        HorizontalDivider(color = Color.Black, thickness = 1.dp)
                     }
                 }
             }

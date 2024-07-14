@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +30,6 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.leodemo.taipei_tour_compose.R
 import com.leodemo.taipei_tour_compose.domain.model.AttractionInfo
-import com.leodemo.taipei_tour_compose.ui.theme.color_item_attraction_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_shadow_tint
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 import com.leodemo.taipei_tour_compose.ui.utils.modifier.shadow
@@ -51,7 +51,7 @@ fun SharedTransitionScope.AttractionItem(
                 blurRadius = 0.dp
             )
             .clip(RoundedCornerShape(10.dp))
-            .background(color_item_attraction_background)
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

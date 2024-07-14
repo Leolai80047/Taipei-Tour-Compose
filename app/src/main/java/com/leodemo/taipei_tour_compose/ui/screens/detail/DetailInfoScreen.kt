@@ -19,6 +19,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -36,10 +37,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.leodemo.taipei_tour_compose.R
 import com.leodemo.taipei_tour_compose.ui.components.detail.HyperLinkText
-import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
 import com.leodemo.taipei_tour_compose.ui.theme.color_hyper_link_text
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 
@@ -59,12 +57,12 @@ fun SharedTransitionScope.DetailInfoScreen(
     Column {
         CenterAlignedTopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = color_top_app_bar_container
+                containerColor = MaterialTheme.colorScheme.primary
             ),
             title = {
                 Text(
                     text = LocalizeContext.current.getString(R.string.app_name),
-                    color = color_top_app_bar_onContainer,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 20.dp.dpToSp()
                 )
             },
@@ -74,7 +72,7 @@ fun SharedTransitionScope.DetailInfoScreen(
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                        tint = color_top_app_bar_onContainer,
+                        tint = MaterialTheme.colorScheme.onPrimary,
                         contentDescription = null
                     )
                 }
@@ -84,7 +82,7 @@ fun SharedTransitionScope.DetailInfoScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(scrollState)
-                .background(color_attraction_main_background)
+                .background(MaterialTheme.colorScheme.secondary)
                 .padding(horizontal = 5.dp)
         ) {
             data?.let { item ->

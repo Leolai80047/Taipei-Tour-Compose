@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -36,9 +37,6 @@ import com.leodemo.taipei_tour_compose.domain.model.AttractionInfo
 import com.leodemo.taipei_tour_compose.ui.components.attraction.AttractionPager
 import com.leodemo.taipei_tour_compose.ui.components.attraction.ChooseLanguageDialog
 import com.leodemo.taipei_tour_compose.ui.components.attraction.MoveTopButton
-import com.leodemo.taipei_tour_compose.ui.theme.color_attraction_main_background
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_container
-import com.leodemo.taipei_tour_compose.ui.theme.color_top_app_bar_onContainer
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.dpToSp
 import com.leodemo.taipei_tour_compose.ui.utils.language.SupportLanguageEnum
@@ -73,16 +71,16 @@ fun SharedTransitionScope.AttractionScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color_attraction_main_background)
+                .background(MaterialTheme.colorScheme.secondary)
         ) {
             CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = color_top_app_bar_container
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
                 title = {
                     Text(
                         text = LocalizeContext.current.getString(R.string.app_name),
-                        color = color_top_app_bar_onContainer,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         fontSize = 20.dp.dpToSp()
                     )
                 },
