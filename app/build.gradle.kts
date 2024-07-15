@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -21,9 +24,33 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        val properties = Properties()
+        val secretPropertiesFile = project.rootProject.file("secret.properties")
+        if (secretPropertiesFile.canRead()) {
+            properties.load(FileInputStream(secretPropertiesFile))
+        }
+        create("release") {
+            storeFile = File("$rootDir/app/taipeitour.keystore")
+            storePassword = properties["RELEASE_KEYSTORE_PASSWORD"].toString()
+            keyAlias = properties["RELEASE_KEY_ALIAS"].toString()
+            keyPassword = properties["RELEASE_KEY_PASSWORD"].toString()
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
             isMinifyEnabled = false
+            isShrinkResources = false
+        }
+
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            isDebuggable = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
