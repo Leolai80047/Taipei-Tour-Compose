@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -52,7 +53,8 @@ fun SharedTransitionScope.AttractionItem(
             )
             .clip(RoundedCornerShape(10.dp))
             .background(MaterialTheme.colorScheme.secondaryContainer)
-            .padding(10.dp),
+            .padding(10.dp)
+            .testTag("AttractionItem"),
         verticalAlignment = Alignment.CenterVertically
     ) {
         GlideImage(

@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -69,7 +70,7 @@ fun WebScreen(
         )
         Box(modifier = Modifier.weight(1f)) {
             AndroidView(
-                modifier = Modifier,
+                modifier = Modifier.testTag("WebView"),
                 factory = {
                     WebView(it).apply {
                         layoutParams = ViewGroup.LayoutParams(

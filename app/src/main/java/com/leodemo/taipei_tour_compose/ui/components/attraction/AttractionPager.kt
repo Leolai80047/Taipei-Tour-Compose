@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -92,6 +93,7 @@ fun SharedTransitionScope.AttractionPager(
             ) {
                 LazyColumn(
                     modifier = Modifier
+                        .testTag("AttractionList")
                         .padding(horizontal = 5.dp),
                     state = listState
                 ) {

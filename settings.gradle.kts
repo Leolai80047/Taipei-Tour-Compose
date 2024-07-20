@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Taipei-Tour_Compose"
 include(":app")
 include(":taipeitour_core:app")
- 
+include(":baselineprofile")

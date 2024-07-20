@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.plugin.serialization)
     alias(libs.plugins.jetbrains.kotlin.kapt)
     alias(libs.plugins.jetbrains.kotlin.plugin.parcelize)
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -82,9 +83,13 @@ dependencies {
     // implement submodule
     implementation(project(path = ":taipeitour_core:app"))
 
+    // Baseline Profile
+    "baselineProfile"(project(":baselineprofile"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.profileinstaller)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
