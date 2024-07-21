@@ -8,7 +8,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,7 +23,7 @@ import com.leodemo.taipei_tour_compose.ui.screens.web.WebScreen
 import com.leodemo.taipei_tour_compose.ui.utils.LocalizeContext
 import com.leodemo.taipei_tour_compose.ui.utils.language.LocaleUtils
 
-@OptIn(ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun AttractionNavigation() {
     val navController = rememberNavController()
@@ -34,7 +38,13 @@ fun AttractionNavigation() {
     }
     CompositionLocalProvider(LocalizeContext provides localizeContext) {
         SharedTransitionLayout {
-            NavHost(navController = navController, startDestination = Screen.AttractionScreen) {
+            NavHost(
+                modifier = Modifier.semantics {
+                    testTagsAsResourceId = true
+                },
+                navController = navController,
+                startDestination = Screen.AttractionScreen
+            ) {
                 composable<Screen.AttractionScreen> {
                     AttractionScreen(
                         animatedVisibilityScope = this,

@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -5,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.plugin.serialization)
     alias(libs.plugins.jetbrains.kotlin.kapt)
     alias(libs.plugins.jetbrains.kotlin.plugin.parcelize)
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -21,9 +25,33 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        val properties = Properties()
+        val secretPropertiesFile = project.rootProject.file("secret.properties")
+        if (secretPropertiesFile.canRead()) {
+            properties.load(FileInputStream(secretPropertiesFile))
+        }
+        create("release") {
+            storeFile = File("$rootDir/app/taipeitour.keystore")
+            storePassword = properties["RELEASE_KEYSTORE_PASSWORD"].toString()
+            keyAlias = properties["RELEASE_KEY_ALIAS"].toString()
+            keyPassword = properties["RELEASE_KEY_PASSWORD"].toString()
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
             isMinifyEnabled = false
+            isShrinkResources = false
+        }
+
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            isDebuggable = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -43,7 +71,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.2"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     androidResources {
         generateLocaleConfig = true
@@ -55,9 +83,13 @@ dependencies {
     // implement submodule
     implementation(project(path = ":taipeitour_core:app"))
 
+    // Baseline Profile
+    "baselineProfile"(project(":baselineprofile"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.profileinstaller)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

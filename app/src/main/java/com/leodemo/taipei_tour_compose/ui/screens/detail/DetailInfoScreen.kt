@@ -28,6 +28,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -80,6 +81,7 @@ fun SharedTransitionScope.DetailInfoScreen(
         )
         Column(
             modifier = Modifier
+                .testTag("DetailScrollView")
                 .fillMaxSize()
                 .verticalScroll(scrollState)
                 .background(MaterialTheme.colorScheme.secondary)
@@ -103,6 +105,7 @@ fun SharedTransitionScope.DetailInfoScreen(
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
+                    modifier = Modifier.testTag("Title"),
                     text = item.name,
                     fontSize = 20.dp.dpToSp(),
                     fontWeight = FontWeight.Bold,
@@ -123,9 +126,11 @@ fun SharedTransitionScope.DetailInfoScreen(
                 )
                 Spacer(modifier = Modifier.height(30.dp))
                 HyperLinkText(
-                    modifier = Modifier.clickable {
-                        onNavigateWebScreen(item.url)
-                    },
+                    modifier = Modifier
+                        .testTag("UrlText")
+                        .clickable {
+                            onNavigateWebScreen(item.url)
+                        },
                     text = item.url,
                     linkColor = color_hyper_link_text
                 )

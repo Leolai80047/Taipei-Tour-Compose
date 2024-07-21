@@ -1,0 +1,63 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+
+plugins {
+    alias(libs.plugins.android.test)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.baselineprofile)
+}
+
+android {
+    namespace = "com.leodemo.baselineprofile"
+    compileSdk = 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    testOptions.managedDevices.devices {
+        create<ManagedVirtualDevice>("pixel3aApi34") {
+            device = "Pixel 3a API 34"
+            apiLevel = 34
+            systemImageSource = "aosp"
+        }
+    }
+
+    defaultConfig {
+        minSdk = 28
+        targetSdk = 34
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    targetProjectPath = ":app"
+
+}
+
+// This is the configuration block for the Baseline Profile plugin.
+// You can specify to run the generators on a managed devices or connected devices.
+baselineProfile {
+    managedDevices += "pixel3aApi34"
+    useConnectedDevices = false
+}
+
+dependencies {
+    implementation(libs.androidx.junit)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.uiautomator)
+    implementation(libs.androidx.benchmark.macro.junit4)
+}
+
+androidComponents {
+    onVariants { v ->
+        val artifactsLoader = v.artifacts.getBuiltArtifactsLoader()
+        v.instrumentationRunnerArguments.put(
+            "targetAppId",
+            v.testedApks.map { artifactsLoader.load(it)?.applicationId }
+        )
+    }
+}
