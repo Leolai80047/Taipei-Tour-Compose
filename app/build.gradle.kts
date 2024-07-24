@@ -27,7 +27,7 @@ android {
 
     signingConfigs {
         val properties = Properties()
-        val secretPropertiesFile = project.rootProject.file("secret.properties")
+        val secretPropertiesFile = File("$rootDir/secret.properties")
         if (secretPropertiesFile.canRead()) {
             properties.load(FileInputStream(secretPropertiesFile))
         }
