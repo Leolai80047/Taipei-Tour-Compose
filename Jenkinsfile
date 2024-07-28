@@ -8,16 +8,22 @@ pipeline {
     stages {
         stage('Setup') {
           steps {
-            sh 'git submodule update --init --recursive'
-            sh 'git checkout feature/CI_TEST'
-            sh 'cp /var/jenkins_home/keystores/TaipeiTour-Compose/taipeitour.keystore ./app/taipeitour.keystore'
-            sh 'cp /var/jenkins_home/keystores/TaipeiTour-Compose/secret.properties ./secret.properties'
-            sh 'chmod +x ./gradlew'
+            sh "git submodule update --init --recursive"
+            sh "cp /var/jenkins_home/keystores/TaipeiTour-Compose/taipeitour.keystore ./app/taipeitour.keystore"
+            sh "cp /var/jenkins_home/keystores/TaipeiTour-Compose/secret.properties ./secret.properties"
+            sh "cp /var/jenkins_home/keystores/TaipeiTour-Compose/google-services.json ./app/google-services.json"
+            sh "cp /var/jenkins_home/keystores/TaipeiTour-Compose/firebase-private-key.json ./firebase-private-key.json"
+            sh "chmod +x ./gradlew"
           }
         }
         stage('Build') {
           steps {
-            sh './gradlew bundleRelease'
+            sh './gradlew assembleRelease'
+          }
+        }
+        stage('Deploy') {
+          steps {
+            sh './gradlew appDistributionUploadRelease'
           }
         }
     }

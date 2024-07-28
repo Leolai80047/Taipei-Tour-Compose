@@ -86,3 +86,5 @@ app/release/output.json
 .idea/codeStyles/
 # keystore config
 secret.properties
+# firebase private key
+firebase-private-key.json

@@ -1,3 +1,4 @@
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -9,6 +10,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.kapt)
     alias(libs.plugins.jetbrains.kotlin.plugin.parcelize)
     alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.gms.googleServices)
+    alias(libs.plugins.firebase.appDistribution)
 }
 
 android {
@@ -56,6 +59,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            firebaseAppDistribution {
+                artifactType = "APK"
+                serviceCredentialsFile = "$rootDir/firebase-private-key.json"
+                groups = "owner"
+            }
         }
     }
     compileOptions {
@@ -120,4 +128,8 @@ dependencies {
 
     // chrome custom tab
     implementation(libs.androidx.browser)
+
+    // firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

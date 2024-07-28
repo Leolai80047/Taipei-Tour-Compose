@@ -1,5 +1,6 @@
 package com.leodemo.taipei_tour_compose.ui.navigation
 
+import android.os.Bundle
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
@@ -16,6 +17,8 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.logEvent
 import com.leodemo.taipei_tour_compose.ui.screens.Screen
 import com.leodemo.taipei_tour_compose.ui.screens.attraction.AttractionScreen
 import com.leodemo.taipei_tour_compose.ui.screens.detail.DetailInfoScreen
@@ -54,6 +57,10 @@ fun AttractionNavigation() {
                         },
                         onItemClick = { info ->
                             navController.navigate(Screen.DetailInfoScreen(info))
+                            FirebaseAnalytics.getInstance(context).logEvent("attraction_info") {
+                                param("id", info.id)
+                                param("name", info.name)
+                            }
                         }
                     )
                 }

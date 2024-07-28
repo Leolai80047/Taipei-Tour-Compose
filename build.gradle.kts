@@ -9,4 +9,6 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.plugin.parcelize) apply false
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.baselineprofile) apply false
+    alias(libs.plugins.gms.googleServices) apply false
+    alias(libs.plugins.firebase.appDistribution) apply false
 }
